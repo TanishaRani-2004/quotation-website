@@ -10,7 +10,7 @@ app.use(express.static("public"));
 
 const DATA_FILE = "quotations.json";
 
-/* ---------- HOME PAGE ---------- */
+/* ---------- HOME ---------- */
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
@@ -27,27 +27,26 @@ app.post("/save", (req, res) => {
   quotations.push(data);
   fs.writeFileSync(DATA_FILE, JSON.stringify(quotations, null, 2));
 
-  res.send({ success: true });
+  res.json({ success: true });
 });
 
-/* ---------- GET ALL QUOTATIONS ---------- */
+/* ---------- GET ALL ---------- */
 app.get("/quotations", (req, res) => {
   if (!fs.existsSync(DATA_FILE)) return res.json([]);
-  const quotations = JSON.parse(fs.readFileSync(DATA_FILE));
-  res.json(quotations);
+  res.json(JSON.parse(fs.readFileSync(DATA_FILE)));
 });
 
-/* ---------- GET SINGLE QUOTATION ---------- */
-app.get("/quotation/:id", (req, res) => {
+/* ---------- GET SINGLE (FIXED) ---------- */
+app.get("/quotation/:qno", (req, res) => {
   if (!fs.existsSync(DATA_FILE)) return res.json(null);
 
   const quotations = JSON.parse(fs.readFileSync(DATA_FILE));
-  const quotation = quotations.find(q => q.id === req.params.id);
-  res.json(quotation);
+  const quotation = quotations.find(q => q.quotationNo === req.params.qno);
+
+  res.json(quotation || null);
 });
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-
 
