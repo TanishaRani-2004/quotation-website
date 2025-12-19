@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Quotation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="company-header">
+    <h1>BHAKTHAMARA ELECTRICALS</h1>
+    <p>Complete Electrical Solutions for Modern Living</p>
+    <p>No. 244/1, Adi Complex, Chickpet Main Road, Bangalore-560053</p>
+    <p>Ph: 080 41149053, 9341637582, 9611243421 | Email: abahubali20@gmail.com</p>
+    <p>GSTIN : 29AOEPB3424P1ZS</p>
+</div>
+
+<!-- INFO -->
+<div class="section">
+    <p><span class="label">Date:</span>
+        <input type="date" id="date">
+    </p>
+
+    <p><span class="label">Customer Name:</span>
+        <input type="text" id="customerName">
+    </p>
+
+    <p><span class="label">Phone:</span>
+        <input type="text" id="phone">
+    </p>
+
+    <p><span class="label">Quotation No:</span>
+        <span id="quotationNo">AUTO</span>
+    </p>
+</div>
+
+<!-- TABLE -->
+<table id="quotationTable">
+    <thead>
+        <tr>
+            <th>Sl.No</th>
+            <th>Area</th>
+            <th>Description</th>
+            <th>Qty</th>
+            <th>MRP</th>
+            <th>Rate</th>
+            <th>Total</th>
+            <th class="action-col no-print">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td><input type="text"></td>
+            <td><input type="text"></td>
+            <td><input type="number" oninput="calculateRow(this)"></td>
+            <td><input type="number"></td>
+            <td><input type="number" oninput="calculateRow(this)"></td>
+            <td class="row-total">0</td>
+            <td class="action-col no-print">
+                <button class="action-btn" onclick="deleteRow(this)">✖</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- TOTAL -->
+<div class="total-box">
+    Grand Total: ₹ <span id="grandTotal">0</span>
+</div>
+
+<!-- BUTTONS -->
+<div class="buttons no-print">
+    <button onclick="addRow()">➕ Add Row</button>
+    <button onclick="saveQuotation()">💾 Save</button>
+    <button onclick="window.print()">⬇ Download PDF</button>
+    <a href="index.html"><button>⬅ Home</button></a>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
