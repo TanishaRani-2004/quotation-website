@@ -12,7 +12,7 @@ const DATA_FILE = "quotations.json";
 
 /* ---------- HOME PAGE ---------- */
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "home.html"));
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 /* ---------- SAVE QUOTATION ---------- */
@@ -49,4 +49,5 @@ app.get("/quotation/:id", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
 
