@@ -1,0 +1,18 @@
+[
+  {
+    "quotationNo": "BE-2025-001",
+    "date": "2025-12-19",
+    "name": "Tanisha ",
+    "phone": "7019598660",
+    "total": "44",
+    "items": [
+      {
+        "area": "Cable",
+        "description": "abc",
+        "qty": "2",
+        "rate": "22",
+        "total": "44"
+      }
+    ]
+  }
+]

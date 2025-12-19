@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quotation History</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="company-header">
+    <h1>BHAKTHAMARA ELECTRICALS</h1>
+    <p>Authorized Electrical & Lighting Solutions</p>
+</div>
+
+<h2 style="text-align:center; margin-top:20px;">Quotation History</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Quotation No</th>
+            <th>Date</th>
+            <th>Customer</th>
+            <th>Phone</th>
+            <th>Total (₹)</th>
+            <th class="action-col no-print">Action</th>
+        </tr>
+    </thead>
+    <tbody id="historyTable"></tbody>
+</table>
+
+<div class="buttons no-print">
+    <a href="home.html"><button>⬅ Home</button></a>
+</div>
+
+<script>
+fetch("/quotations")
+.then(res => res.json())
+.then(data => {
+    const table = document.getElementById("historyTable");
+
+    data.forEach(q => {
+        const row = table.insertRow();
+        row.innerHTML = `
+            <td>${q.quotationNo}</td>
+            <td>${q.date}</td>
+            <td>${q.name}</td>
+            <td>${q.phone}</td>
+            <td>${q.total}</td>
+            <td class="action-col no-print">
+                <a href="view.html?qno=${q.quotationNo}">
+                    <button class="action-btn">👁</button>
+                </a>
+            </td>
+        `;
+    });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+<h2>Saved Quotations</h2>
+<ul id="list"></ul>
+
+<script>
+fetch("/quotations")
+.then(res => res.json())
+.then(data => {
+    let list = document.getElementById("list");
+    data.forEach(q => {
+        let li = document.createElement("li");
+        li.innerText = `${q.date} - ${q.name} - ₹${q.total}`;
+        list.appendChild(li);
+    });
+});
+</script>

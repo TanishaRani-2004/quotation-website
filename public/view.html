@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Quotation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="company-header">
+    <h1>BHAKTHAMARA ELECTRICALS</h1>
+    <p>Complete Electrical Solutions for Modern Living</p>
+    <p>No. 244/1, Adi Complex, Chickpet Main Road, Bangalore-560053</p>
+    <p>Ph: 080 41149053, 9341637582, 9611243421 | Email: abahubali20@gmail.com</p>
+    <p>GSTIN : 29AOEPB3424P1ZS</p>
+</div>
+
+<p><b>Quotation No:</b> <span id="quotationNo"></span></p>
+<p><b>Date:</b> <span id="date"></span></p>
+<p><b>Customer:</b> <span id="name"></span></p>
+<p><b>Phone:</b> <span id="phone"></span></p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Sl.No</th>
+            <th>Area</th>
+            <th>Description</th>
+            <th>Qty</th>
+            <th>MRP</th>
+            <th>Rate</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody id="rows"></tbody>
+</table>
+
+<div class="total-box">
+    Grand Total: ₹ <span id="grandTotal"></span>
+</div>
+
+<div class="buttons no-print">
+    <button onclick="window.print()">⬇ Download PDF</button>
+</div>
+
+<script>
+const qno = new URLSearchParams(window.location.search).get("qno");
+
+fetch(`/quotation/${qno}`)
+.then(res => res.json())
+.then(q => {
+
+    document.getElementById("quotationNo").innerText = q.quotationNo;
+    document.getElementById("date").innerText = q.date;
+    document.getElementById("name").innerText = q.name;
+    document.getElementById("phone").innerText = q.phone;
+    document.getElementById("grandTotal").innerText = q.total;
+
+    const tbody = document.getElementById("rows");
+
+    q.items.forEach((item, i) => {
+        const row = tbody.insertRow();
+        row.innerHTML = `
+            <td>${i + 1}</td>
+            <td>${item.area}</td>
+            <td>${item.description}</td>
+            <td>${item.qty}</td>
+            <td>${item.mrp}</td>
+            <td>${item.rate}</td>
+            <td>${item.total}</td>
+        `;
+    });
+});
+</script>
+
+</body>
+</html>
